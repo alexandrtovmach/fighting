@@ -3,8 +3,77 @@
 	<head>
 		<meta charset="UTF-8">
 		<script src="general.js"></script>
+		<link rel="stylesheet" href="style.css">
 	</head>
-	<body>
-		<h1>FIGHTING ARENA</h1>
+	<body align="center">
+		<center><h1>FIGHTING ARENA</h1></center>
+		
+		<div id="button" onclick="startFight()">FIGHT</div>
+		<div id="arena">
+			<div class="gladiators" id="glad_1">
+				<center><div id="showName1"></div></center>
+				<div id="info1">
+					<label>NAME:
+						<input id="name1"></input>
+					</label><br><br>
+					<label>POWER:
+						<input id="power1"></input>
+					</label><br><br>
+					<label>HEALTH:
+						<input id="health1"></input>
+					</label>
+				</div>
+				<img width="100%" src="glad_1.png">
+			</div>
+			
+			<div class="gladiators" id="glad_2">
+				<center><div id="showName2"></div></center>
+				<div id="info2">
+					<label>NAME:
+						<input id="name2"></input>
+					</label><br><br>
+					<label>POWER:
+						<input id="power2"></input>
+					</label><br><br>
+					<label>HEALTH:
+						<input id="health2"></input>
+					</label>
+				</div>
+				<img width="100%" src="glad_2.png">
+			</div>
+		</div>
+		
+		<script>
+			function startFight() {
+				var infoObj1 = {
+					name: document.getElementById("name1").value,
+					power: document.getElementById("power1").value,
+					health: document.getElementById("health1").value
+				};
+				var infoObj2 = {
+					name: document.getElementById("name2").value,
+					power: document.getElementById("power2").value,
+					health: document.getElementById("health2").value
+				};
+				
+				
+				document.getElementById("info1").style.display = "none";
+				document.getElementById("info2").style.display = "none";
+				document.getElementById("button").style.display = "none";
+				
+				document.getElementById("showName1").innerHTML = infoObj1.name;
+				document.getElementById("showName2").innerHTML = infoObj2.name;
+				
+				var gladiator1 = document.getElementById("glad_1")
+				var gladiator2 = document.getElementById("glad_2")
+				gladiator1.style.left = "28%";
+				gladiator2.style.right = "28%";
+				
+				
+				setTimeout(function () {
+					showFight(infoObj1, infoObj2, gladiator1, gladiator2)
+				}, 5000);
+			}
+		</script>
 	</body>
 </html>
