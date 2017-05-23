@@ -1,4 +1,3 @@
-<script>
 class Fighter {
 	constructor(name, power = 5, health = 100) {
 		this.name = name;
@@ -64,5 +63,3 @@ function statistics(winner, loser, round) {
 }
 
 fight(fighter, improvedFighter)
-
-</script>
