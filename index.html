@@ -2,13 +2,19 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
+		<link rel="icon" href="favicon.ico" type="image/x-icon">
 		<script src="general.js"></script>
 		<link rel="stylesheet" href="style.css">
 	</head>
 	<body align="center">
+		<img id="bin_logo" src="binary-studio-academy-img.png">
 		<center><h1>FIGHTING ARENA</h1></center>
 		
 		<div id="button" onclick="startFight()">FIGHT</div>
+		<div id="hide">
+		<h3>Enter bonus damage coeficient</h3>
+		<input id="coeficient" placeholder="5, 4, 8, 0, 1"></input>
+		</div>
 		<div id="arena">
 			<div class="gladiators" id="glad_1">
 				<center><div id="showName1"></div></center>
@@ -42,7 +48,6 @@
 				<img width="100%" src="glad_2.png">
 			</div>
 		</div>
-		
 		<script>
 			function startFight() {
 				var infoObj1 = {
@@ -56,10 +61,14 @@
 					health: document.getElementById("health2").value
 				};
 				
+				var coeficient = document.getElementById("coeficient").value;
+				coeficient = (coeficient == '')? [3,2,1,2,3]: coeficient.split(',');
+				//console.log(coeficient)
 				
 				document.getElementById("info1").style.display = "none";
 				document.getElementById("info2").style.display = "none";
 				document.getElementById("button").style.display = "none";
+				document.getElementById("hide").style.display = "none";
 				
 				document.getElementById("showName1").innerHTML = infoObj1.name;
 				document.getElementById("showName2").innerHTML = infoObj2.name;
@@ -71,7 +80,7 @@
 				
 				
 				setTimeout(function () {
-					showFight(infoObj1, infoObj2, gladiator1, gladiator2)
+					showFight(infoObj1, infoObj2, gladiator1, gladiator2, coeficient)
 				}, 5000);
 			}
 		</script>

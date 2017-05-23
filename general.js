@@ -1,4 +1,4 @@
-function showFight(warrior1, warrior2, glad1, glad2) {
+function showFight(warrior1, warrior2, glad1, glad2, coeficient) {
 	class Fighter {
 		constructor(name, power = 5, health = 100) {
 			this.name = name;
@@ -25,49 +25,50 @@ function showFight(warrior1, warrior2, glad1, glad2) {
 	let fighter = new Fighter (warrior1.name, warrior1.power, warrior1.health);
 	let improvedFighter = new ImprovedFighter(warrior2.name, warrior2.power, warrior2.health);
 	
-	let round = 1;
-	
+	let round = 0;
+	let i = 0;
 	
 	function fight(fighter, improvedFighter, ...point) {
-		point = (point && point.length)? point: [2];   
-		for (var i = 0; i < point.length; i++) {
-			if (!((fighter.health > 0) && (improvedFighter.health > 0))) {
-			
-				let winner = (fighter.health > 0)? fighter: improvedFighter;
-				let loser = (fighter.health <= 0)? fighter: improvedFighter;
-				glad1.style.top = "40%";
-				glad2.style.top = "40%";
-				glad1.style.opacity = "0.3";
-				glad2.style.opacity = "0.3";
-				return statistics(winner, loser, round-1)
-			};
-			
-			console.log('lap#' + round);
-			round++;
-			
-			if (round % 2 == 0) {
-				glad1.style.left = "40%";
-				glad2.style.background = "red";
-				fighter.hit(improvedFighter, point[i]);
-				hpDiv(glad2, improvedFighter)
-				setTimeout(function () {glad1.style.left = "28%";
-				glad2.style.background = ""}, 500);
-			} else {
-				glad2.style.right = "40%";
-				glad1.style.background = "red";
-				improvedFighter.hit(fighter, point[i]);
-				hpDiv(glad1, fighter)
-				setTimeout(function () {glad2.style.right = "28%";
-				glad1.style.background = ""}, 500)
-			}
+		point = point[0];
+		if (i >= point.length) { i = 0 };
+		if (!((fighter.health > 0) && (improvedFighter.health > 0))) {
 		
+			let winner = (fighter.health > 0)? fighter: improvedFighter;
+			let loser = (fighter.health <= 0)? fighter: improvedFighter;
+			glad1.style.top = "35%";
+			glad2.style.top = "35%";
+			glad1.style.opacity = "0.3";
+			glad2.style.opacity = "0.3";
+			return statistics(winner, loser, round)
 		};
+		
+		console.log('lap#' + round);
+		round++;
+		
+		if (round % 2 == 0) {
+			glad1.style.left = "40%";
+			glad2.style.background = "red";
+			fighter.hit(improvedFighter, point[i]);
+			console.log(point[i]);
+			hpDiv(glad2, improvedFighter)
+			setTimeout(function () {glad1.style.left = "28%";
+			glad2.style.background = ""}, 500);
+		} else {
+			glad2.style.right = "40%";
+			glad1.style.background = "red";
+			improvedFighter.hit(fighter, point[i]);
+			console.log(point[i]);
+			hpDiv(glad1, fighter)
+			setTimeout(function () {glad2.style.right = "28%";
+			glad1.style.background = ""}, 500)
+		}
+		i++;
 		setTimeout(function () { 
-			fight(fighter, improvedFighter) 
+			fight(fighter, improvedFighter, point) 
 		}, 1000)
 	}
 	
-	fight(fighter, improvedFighter)
+	fight(fighter, improvedFighter, coeficient)
 	
 	function statistics(winner, loser, round) {
 		var result = document.createElement('div')
