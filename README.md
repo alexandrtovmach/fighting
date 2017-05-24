@@ -3,3 +3,6 @@
 3. Click the "Fight" button
 4. Pay attention to the fight.
 5. After ending fight check the "Final statistic"
+
+Crossbrowsering not guaranted!
+Tested only on: Google Chrome
