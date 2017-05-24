@@ -28,7 +28,7 @@ let round = 0;
 
 
 function fight(fighter, improvedFighter, ...point) {
-  point = (point && point.length)? point: [2];   
+  point = (point && point.length)? point: [1];   
   for (var i = 0; i < point.length; i++) {
 	  //console.log('lap#' + round);
 	  round++;
