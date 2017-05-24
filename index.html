@@ -48,41 +48,5 @@
 				<img width="100%" src="glad_2(100%).png">
 			</div>
 		</div>
-		<script>
-			function startFight() {
-				var infoObj1 = {
-					name: document.getElementById("name1").value,
-					power: document.getElementById("power1").value,
-					health: document.getElementById("health1").value
-				};
-				var infoObj2 = {
-					name: document.getElementById("name2").value,
-					power: document.getElementById("power2").value,
-					health: document.getElementById("health2").value
-				};
-				
-				var coeficient = document.getElementById("coeficient").value;
-				coeficient = (coeficient == '')? [3,2,1,2,3]: coeficient.split(',');
-				//console.log(coeficient)
-				
-				document.getElementById("info1").style.display = "none";
-				document.getElementById("info2").style.display = "none";
-				document.getElementById("button").style.display = "none";
-				document.getElementById("hide").style.display = "none";
-				
-				document.getElementById("showName1").innerHTML = infoObj1.name;
-				document.getElementById("showName2").innerHTML = infoObj2.name;
-				
-				var gladiator1 = document.getElementById("glad_1")
-				var gladiator2 = document.getElementById("glad_2")
-				gladiator1.style.left = "28%";
-				gladiator2.style.right = "28%";
-				
-				
-				setTimeout(function () {
-					showFight(infoObj1, infoObj2, gladiator1, gladiator2, coeficient)
-				}, 5000);
-			}
-		</script>
 	</body>
 </html>
