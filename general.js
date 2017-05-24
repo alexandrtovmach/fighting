@@ -25,31 +25,30 @@ let fighter = new Fighter ("Maximus", 1, 150);
 let improvedFighter = new ImprovedFighter("Spartacus", 2, 110);
 
 let round = 0;
-
+let i = 0;
 
 function fight(fighter, improvedFighter, ...point) {
-  point = (point && point.length)? point: [1];   
-  for (var i = 0; i < point.length; i++) {
-	  //console.log('lap#' + round);
-	  round++;
-    if (!((fighter.health > 0) && (improvedFighter.health > 0))) {
-      
-      let winner = (fighter.health > 0)? fighter: improvedFighter;
-      let loser = (fighter.health < 0)? fighter: improvedFighter;
-      return statistics(winner, loser, round-2)
-    };
-    
-    if (round % 2 == 0) {
-      fighter.hit(improvedFighter, point[i])
-      
-    } else {
-      improvedFighter.hit(fighter, point[i])
-      
-    }
-    
-  };
-  
-  fight(fighter, improvedFighter, ...point)
+  point = (point && point.length)? point: [2];  
+  if (i >= point.length) { i = 0 };
+		
+		if (!((fighter.health > 0) && (improvedFighter.health > 0))) {
+		
+			let winner = (fighter.health > 0)? fighter: improvedFighter;
+			let loser = (fighter.health <= 0)? fighter: improvedFighter;
+			return statistics(winner, loser, round)
+		};
+		
+		//console.log('lap#' + round);
+		round++;
+		
+		if (round % 2 == 0) {
+			fighter.hit(improvedFighter, point[i]);
+		} else {
+			improvedFighter.hit(fighter, point[i]);
+		}
+		
+		i++;
+		fight(fighter, improvedFighter, point); 
   
 }
 
@@ -62,4 +61,4 @@ function statistics(winner, loser, round) {
   2. ${loser.name}: ${loser.health}`)
 }
 
-fight(fighter, improvedFighter)
+fight(fighter, improvedFighter, 4, 1, 9, 5, 2)
