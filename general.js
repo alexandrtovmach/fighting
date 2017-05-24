@@ -1,3 +1,38 @@
+function startFight() {
+	var infoObj1 = {
+		name: document.getElementById("name1").value,
+		power: document.getElementById("power1").value,
+		health: document.getElementById("health1").value
+	};
+	var infoObj2 = {
+		name: document.getElementById("name2").value,
+		power: document.getElementById("power2").value,
+		health: document.getElementById("health2").value
+	};
+	
+	var coeficient = document.getElementById("coeficient").value;
+	coeficient = (coeficient == '')? [3,2,1,2,3]: coeficient.split(',');
+	//console.log(coeficient)
+	
+	document.getElementById("info1").style.display = "none";
+	document.getElementById("info2").style.display = "none";
+	document.getElementById("button").style.display = "none";
+	document.getElementById("hide").style.display = "none";
+	
+	document.getElementById("showName1").innerHTML = infoObj1.name;
+	document.getElementById("showName2").innerHTML = infoObj2.name;
+	
+	var gladiator1 = document.getElementById("glad_1")
+	var gladiator2 = document.getElementById("glad_2")
+	gladiator1.style.left = "28%";
+	gladiator2.style.right = "28%";
+	
+	
+	setTimeout(function () {
+		showFight(infoObj1, infoObj2, gladiator1, gladiator2, coeficient)
+	}, 5000);
+}
+
 function showFight(warrior1, warrior2, glad1, glad2, coeficient) {
 	class Fighter {
 		constructor(name, power = 5, health = 100) {
@@ -27,10 +62,13 @@ function showFight(warrior1, warrior2, glad1, glad2, coeficient) {
 	
 	let round = 0;
 	let i = 0;
+	let maxHealthWar1 = fighter.health;
+	let maxHealthWar2 = improvedFighter.health;
 	
 	function fight(fighter, improvedFighter, ...point) {
 		point = point[0];
 		if (i >= point.length) { i = 0 };
+		
 		if (!((fighter.health > 0) && (improvedFighter.health > 0))) {
 		
 			let winner = (fighter.health > 0)? fighter: improvedFighter;
@@ -42,7 +80,7 @@ function showFight(warrior1, warrior2, glad1, glad2, coeficient) {
 			return statistics(winner, loser, round)
 		};
 		
-		console.log('lap#' + round);
+		//console.log('lap#' + round);
 		round++;
 		
 		if (round % 2 == 0) {
@@ -62,6 +100,20 @@ function showFight(warrior1, warrior2, glad1, glad2, coeficient) {
 			setTimeout(function () {glad2.style.right = "28%";
 			glad1.style.background = ""}, 500)
 		}
+		if ((fighter.health / maxHealthWar1 < 0.75) && (fighter.health/maxHealthWar1 >= 0.5)) {
+			glad1.getElementsByTagName('img')[0].src = "glad_1(75%).png";
+		} else if ((fighter.health / maxHealthWar1 < 0.5) && (fighter.health/maxHealthWar1 >= 0.25)) {
+			glad1.getElementsByTagName('img')[0].src = "glad_1(50%).png";
+		} else if (fighter.health / maxHealthWar1 < 0.25) {
+			glad1.getElementsByTagName('img')[0].src = "glad_1(25%).png";
+		};
+		if ((improvedFighter.health / maxHealthWar2 < 0.75) && (improvedFighter.health/maxHealthWar2 >= 0.5)) {
+			glad2.getElementsByTagName('img')[0].src = "glad_2(75%).png";
+		} else if ((improvedFighter.health / maxHealthWar2 < 0.5) && (improvedFighter.health/maxHealthWar2 >= 0.25)) {
+			glad2.getElementsByTagName('img')[0].src = "glad_2(50%).png";
+		} else if (improvedFighter.health / maxHealthWar2 < 0.25) {
+			glad2.getElementsByTagName('img')[0].src = "glad_2(25%).png";
+		};
 		i++;
 		setTimeout(function () { 
 			fight(fighter, improvedFighter, point) 
@@ -93,6 +145,7 @@ function showFight(warrior1, warrior2, glad1, glad2, coeficient) {
 		hp.style.transition = "1s";
 		hp.style.fontSize = "20px";
 		hp.innerHTML = war.health;
+		
 		glad.append(hp);
 		setTimeout(function () {hp.style.display = "none"}, 800)
 	}
