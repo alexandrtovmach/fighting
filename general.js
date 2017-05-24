@@ -87,7 +87,7 @@ function showFight(warrior1, warrior2, glad1, glad2, coeficient) {
 			glad1.style.left = "40%";
 			glad2.style.background = "red";
 			fighter.hit(improvedFighter, point[i]);
-			console.log(point[i]);
+			//console.log(point[i]);
 			hpDiv(glad2, improvedFighter)
 			setTimeout(function () {glad1.style.left = "28%";
 			glad2.style.background = ""}, 500);
@@ -95,7 +95,7 @@ function showFight(warrior1, warrior2, glad1, glad2, coeficient) {
 			glad2.style.right = "40%";
 			glad1.style.background = "red";
 			improvedFighter.hit(fighter, point[i]);
-			console.log(point[i]);
+			//console.log(point[i]);
 			hpDiv(glad1, fighter)
 			setTimeout(function () {glad2.style.right = "28%";
 			glad1.style.background = ""}, 500)
