@@ -5,4 +5,5 @@
 5. After ending fight check the "Final statistic"
 
 Crossbrowsering not guaranted!
-Tested only on: Google Chrome
+
+Tested only on Google Chrome and only Full Screen
